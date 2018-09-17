@@ -1,0 +1,1 @@
+import startApp from './App';
