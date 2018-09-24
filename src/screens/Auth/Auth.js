@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
+import { connect } from 'react-redux';
 
 import styles from './styles';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
@@ -7,11 +8,13 @@ import MainText from '../../components/UI/MainText/MainText';
 import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground';
 import startMainTabs from '../MainTabs/startMainTabs';
 import validate from '../../utility/validation';
+import { tryAuth } from '../../store/actions/index';
 
 class AuthScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      authMode: 'login',
       controls: {
         email: {
           value: '',
@@ -39,7 +42,32 @@ class AuthScreen extends Component {
   }
 
   loginHandler = () => {
+    const { controls } = this.state;
+    const authData = {
+      email: controls.email.value,
+      password: controls.password.value,
+    };
+    this.props.onLogin(authData);
     startMainTabs();
+  };
+
+  switchAuthModeHandler = () => {
+    this.setState(prevState => ({
+      authMode: prevState.authMode === 'login' ? 'signup' : 'login',
+    }));
+  };
+
+  // email = true, pwrd = true, cp = true, am: authMode = 'signup'
+  // !(email ^ pwrd ^ ((cp ^ am) v !am))
+  // !(email ^ pwrd ^ (cp v !am))
+  // !email v !pwrd v (!cp ^ am)
+  isControlValid = () => {
+    const { controls, authMode } = this.state;
+    return (
+      (!controls.confirmPassword.valid && authMode === 'signup')
+      || !controls.email.valid
+      || !controls.password.valid
+    );
   };
 
   updateInputState = (key, val) => {
@@ -53,9 +81,26 @@ class AuthScreen extends Component {
         equalTo: equalValue,
       };
     }
+    if (key === 'password') {
+      connectedValue = {
+        ...connectedValue,
+        equalTo: val,
+      };
+    }
     this.setState(prevState => ({
       controls: {
         ...prevState.controls,
+        confirmPassword: {
+          ...prevState.controls.confirmPassword,
+          valid:
+            key === 'password'
+              ? validate(
+                prevState.controls.confirmPassword.value,
+                prevState.controls.confirmPassword.validationRules,
+                connectedValue,
+              )
+              : prevState.controls.confirmPassword.valid,
+        },
         [key]: {
           ...prevState.controls[key],
           value: val,
@@ -66,32 +111,60 @@ class AuthScreen extends Component {
   };
 
   render() {
-    const { controls } = this.state;
+    const { controls, authMode } = this.state;
     const { email, password, confirmPassword } = controls;
-    return (
-      <View style={styles.container}>
-        <MainText>YOLO</MainText>
-        <DefaultInput
-          placeholder="Email address"
-          value={email.value}
-          onChangeText={val => this.updateInputState('email', val)}
-        />
-        <DefaultInput
-          placeholder="Password"
-          value={password.value}
-          onChangeText={val => this.updateInputState('password', val)}
-        />
+    let confirmPasswordControl = null;
+    if (authMode === 'signup') {
+      confirmPasswordControl = (
         <DefaultInput
           placeholder="Confirm Password"
           value={confirmPassword.value}
           onChangeText={val => this.updateInputState('confirmPassword', val)}
+          secureTextEntry
         />
-        <ButtonWithBackground color="#ffb347" onPress={this.loginHandler}>
-          Login
+      );
+    }
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <MainText>YOLO</MainText>
+        <ButtonWithBackground color="#ffb347" onPress={this.switchAuthModeHandler}>
+          Switch to
+          {authMode === 'login' ? ' Sign Up' : ' Login'}
         </ButtonWithBackground>
-      </View>
+        <View style={styles.inputContainer}>
+          <DefaultInput
+            placeholder="Email address"
+            value={email.value}
+            onChangeText={val => this.updateInputState('email', val)}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+          />
+          <DefaultInput
+            placeholder="Password"
+            value={password.value}
+            onChangeText={val => this.updateInputState('password', val)}
+            secureTextEntry
+          />
+          {confirmPasswordControl}
+        </View>
+        <ButtonWithBackground
+          color="#ffb347"
+          onPress={this.loginHandler}
+          disabled={this.isControlValid()}
+        >
+          {authMode === 'login' ? 'Login' : ' Submit'}
+        </ButtonWithBackground>
+      </KeyboardAvoidingView>
     );
   }
 }
 
-export default AuthScreen;
+const mapDispatchToProps = dispatch => ({
+  onLogin: authData => dispatch(tryAuth(authData)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AuthScreen);
