@@ -1,17 +1,18 @@
-import { createStore, combineReducers, compose } from 'redux';
+/* eslint no-undef: 0, no-underscore-dangle: 0 */
+import { createStore, combineReducers, compose } from 'redux'
 
-import exampleReducer from './reducers/example';
+import exampleReducer from './reducers/example'
 
 const rootReducer = combineReducers({
   example: exampleReducer,
-});
+})
 
-let composeEnhancers = compose;
+let composeEnhancers = compose
 
 if (__DEV__) {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 }
 
-const configureStore = () => createStore(rootReducer, composeEnhancers());
+const configureStore = () => createStore(rootReducer, composeEnhancers())
 
-export default configureStore;
+export default configureStore

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
 
 class GoalListScreen extends Component {
-  state = {};
+  state = {}
 
   render() {
     return (
       <View>
         <Text>GoalListScreen here!</Text>
       </View>
-    );
+    )
   }
 }
 
-export default GoalListScreen;
+export default GoalListScreen

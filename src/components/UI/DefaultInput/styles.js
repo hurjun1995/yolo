@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   input: {
@@ -9,6 +9,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
-});
+})
 
-export default styles;
+export default styles

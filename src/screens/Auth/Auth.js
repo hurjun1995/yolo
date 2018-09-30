@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
-import { connect } from 'react-redux';
+// @flow
+import * as React from 'react'
+import { View, KeyboardAvoidingView } from 'react-native'
+import { connect } from 'react-redux'
 
-import styles from './styles';
-import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
-import MainText from '../../components/UI/MainText/MainText';
-import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground';
-import startMainTabs from '../MainTabs/startMainTabs';
-import validate from '../../utility/validation';
-import { tryAuth } from '../../store/actions/index';
+import styles from './styles'
+import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
+import MainText from '../../components/UI/MainText/MainText'
+import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground'
+import startMainTabs from '../MainTabs/startMainTabs'
+import validate from '../../utility/validation'
+import { tryAuth } from '../../store/actions/index'
 
-class AuthScreen extends Component {
+type Props = {
+  onLogin: (authData: Object) => void,
+}
+type State = {
+  authMode: string,
+  controls: Object,
+}
+
+class AuthScreen extends React.Component<Props, State> {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       authMode: 'login',
       controls: {
@@ -38,54 +47,55 @@ class AuthScreen extends Component {
           },
         },
       },
-    };
+    }
   }
 
   loginHandler = () => {
-    const { controls } = this.state;
+    const { controls } = this.state
+    const { onLogin } = this.props
     const authData = {
       email: controls.email.value,
       password: controls.password.value,
-    };
-    this.props.onLogin(authData);
-    startMainTabs();
-  };
+    }
+    onLogin(authData)
+    startMainTabs()
+  }
 
   switchAuthModeHandler = () => {
     this.setState(prevState => ({
       authMode: prevState.authMode === 'login' ? 'signup' : 'login',
-    }));
-  };
+    }))
+  }
 
   // email = true, pwrd = true, cp = true, am: authMode = 'signup'
   // !(email ^ pwrd ^ ((cp ^ am) v !am))
   // !(email ^ pwrd ^ (cp v !am))
   // !email v !pwrd v (!cp ^ am)
   isControlValid = () => {
-    const { controls, authMode } = this.state;
+    const { controls, authMode } = this.state
     return (
       (!controls.confirmPassword.valid && authMode === 'signup')
       || !controls.email.valid
       || !controls.password.valid
-    );
-  };
+    )
+  }
 
   updateInputState = (key, val) => {
-    const { controls } = this.state;
-    let connectedValue = {};
-    const equalControl = controls[key].validationRules.equalTo;
+    const { controls } = this.state
+    let connectedValue = {}
+    const equalControl = controls[key].validationRules.equalTo
     if (equalControl) {
-      const equalValue = controls[equalControl].value;
+      const equalValue = controls[equalControl].value
       connectedValue = {
         ...connectedValue,
         equalTo: equalValue,
-      };
+      }
     }
     if (key === 'password') {
       connectedValue = {
         ...connectedValue,
         equalTo: val,
-      };
+      }
     }
     this.setState(prevState => ({
       controls: {
@@ -107,13 +117,13 @@ class AuthScreen extends Component {
           valid: validate(val, prevState.controls[key].validationRules, connectedValue),
         },
       },
-    }));
-  };
+    }))
+  }
 
   render() {
-    const { controls, authMode } = this.state;
-    const { email, password, confirmPassword } = controls;
-    let confirmPasswordControl = null;
+    const { controls, authMode } = this.state
+    const { email, password, confirmPassword } = controls
+    let confirmPasswordControl = null
     if (authMode === 'signup') {
       confirmPasswordControl = (
         <DefaultInput
@@ -122,7 +132,7 @@ class AuthScreen extends Component {
           onChangeText={val => this.updateInputState('confirmPassword', val)}
           secureTextEntry
         />
-      );
+      )
     }
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -156,15 +166,15 @@ class AuthScreen extends Component {
           {authMode === 'login' ? 'Login' : ' Submit'}
         </ButtonWithBackground>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   onLogin: authData => dispatch(tryAuth(authData)),
-});
+})
 
 export default connect(
   null,
   mapDispatchToProps,
-)(AuthScreen);
+)(AuthScreen)

@@ -1,5 +1,6 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+/* eslint react/prefer-stateless-function: 0 */
+import React from 'react'
+import { Provider } from 'react-redux'
 
 function reduxStoreWrapper(MyComponent, store) {
   return () => class StoreWrapper extends React.Component {
@@ -8,9 +9,9 @@ function reduxStoreWrapper(MyComponent, store) {
         <Provider store={store}>
           <MyComponent />
         </Provider>
-      );
+      )
     }
-  };
+  }
 }
 
-export default reduxStoreWrapper;
+export default reduxStoreWrapper

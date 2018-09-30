@@ -1,7 +1,7 @@
-import { Navigation } from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Navigation } from 'react-native-navigation'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-import { platformSpecific } from '../../utility/util';
+import { platformSpecific } from '../../utility/util'
 
 const startMainTabs = () => {
   Promise.all([
@@ -41,8 +41,8 @@ const startMainTabs = () => {
           ],
         },
       },
-    });
-  });
-};
+    })
+  })
+}
 
-export default startMainTabs;
+export default startMainTabs

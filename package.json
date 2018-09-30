@@ -4,34 +4,54 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^9.0.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
-    "eslint": "^5.4.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4.0.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-flowtype": "^2.50.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.67.1",
     "jest": "^23.5.0",
     "jest-react-native": "^18.0.0",
+    "react-dom": "^16.5.2",
     "react-test-renderer": "16.3.1"
   },
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "jest",
-    "lint": "eslint app/",
-    "lint:fix": "eslint app/ --fix"
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "flow": "flow",
+    "flow-stop": "flow stop",
+    "test:unit": "jest",
+    "test": "yarn lint && yarn flow"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testMatch": [
+      "**/?(*.)test.js?(x)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ]
   },
   "dependencies": {
     "babel-core": "^6.26.3",
-    "react": "^16.3.1",
+    "prop-types": "^15.6.2",
+    "react": "@16.3.1",
     "react-native": "~0.55.2",
     "react-native-elements": "^0.19.1",
     "react-native-navigation": "^2.0.2538",
-    "react-native-vector-icons": "^5.0.0",
+    "react-native-vector-icons": "@^4.2.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
   }

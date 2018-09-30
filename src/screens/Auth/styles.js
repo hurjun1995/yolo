@@ -1,7 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { platformSpecific } from '../../utility/util';
+import { StyleSheet, Dimensions } from 'react-native'
+import { platformSpecific } from '../../utility/util'
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +13,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: '85%',
   },
-});
+})
 
-export default styles;
+export default styles

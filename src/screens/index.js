@@ -1,18 +1,17 @@
-import { Navigation } from 'react-native-navigation';
-import { Provider } from 'react-redux';
+import { Navigation } from 'react-native-navigation'
 
-import AuthScreen from './Auth/Auth';
-import GoalListScreen from './GoalList/GoalList';
-import PersonalSettingScreen from './PersonalSetting/PersonalSetting';
-import configureStore from '../store/configureStore';
-import reduxStoreWrapper from '../store/reduxStoreWrapper';
+import AuthScreen from './Auth/Auth'
+import GoalListScreen from './GoalList/GoalList'
+import PersonalSettingScreen from './PersonalSetting/PersonalSetting'
+import configureStore from '../store/configureStore'
+import reduxStoreWrapper from '../store/reduxStoreWrapper'
 
 const registerScreens = () => {
-  const store = configureStore();
+  const store = configureStore()
 
-  Navigation.registerComponent('yolo.AuthScreen', reduxStoreWrapper(AuthScreen, store));
-  Navigation.registerComponent('yolo.GoalListScreen', () => GoalListScreen);
-  Navigation.registerComponent('yolo.PersonalSettingScreen', () => PersonalSettingScreen);
-};
+  Navigation.registerComponent('yolo.AuthScreen', reduxStoreWrapper(AuthScreen, store))
+  Navigation.registerComponent('yolo.GoalListScreen', () => GoalListScreen)
+  Navigation.registerComponent('yolo.PersonalSettingScreen', () => PersonalSettingScreen)
+}
 
-export default registerScreens;
+export default registerScreens

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-
-const MainText = props => <Text style={styles.mainText}>{props.children}</Text>;
+/* eslint react/destructuring-assignment: 0 */
+/* eslint react/prop-types: 0 */
+import React from 'react'
+import { Text, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   mainText: {
@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontSize: 40,
   },
-});
+})
 
-export default MainText;
+const MainText = props => <Text style={styles.mainText}>{props.children}</Text>
+
+export default MainText
