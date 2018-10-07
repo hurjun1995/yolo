@@ -5147,6 +5147,10 @@ react-native-navigation@^2.0.2538:
     prop-types "15.x.x"
     react-lifecycles-compat "2.0.0"
 
+react-native-uuid-generator@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-uuid-generator/-/react-native-uuid-generator-4.0.1.tgz#00e86fc420d855a9c19b3ffe14619985ae798b18"
+
 react-native-vector-icons@@^4.2.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"

@@ -13,16 +13,26 @@ const startMainTabs = () => {
         bottomTabs: {
           children: [
             {
-              component: {
-                name: 'yolo.GoalListScreen',
-                options: {
-                  bottomTab: {
-                    text: 'Goals',
-                    icon: sources[0],
-                    selectedIconColor: 'orange',
-                    selectedTextColor: 'orange',
+              stack: {
+                id: 'GoalSelectionStack',
+                children: [
+                  {
+                    component: {
+                      name: 'yolo.GoalListScreen',
+                      options: {
+                        bottomTab: {
+                          text: 'Goals',
+                          icon: sources[0],
+                          selectedIconColor: 'orange',
+                          selectedTextColor: 'orange',
+                        },
+                      },
+                      passProps: {
+                        originComponentId: 'GoalSelectionStack',
+                      },
+                    },
                   },
-                },
+                ],
               },
             },
             {
