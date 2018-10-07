@@ -2,7 +2,6 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
-import { Button } from 'react-native-elements'
 import { Navigation } from 'react-native-navigation'
 
 import styles from './styles'
