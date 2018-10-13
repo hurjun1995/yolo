@@ -1,0 +1,29 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '8.0'
+
+target 'yolo' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for yolo
+  pod 'Firebase/Core'
+
+  target 'yoloTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'yolo-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for yolo-tvOS
+
+  target 'yolo-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

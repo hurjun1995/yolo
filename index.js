@@ -14,6 +14,6 @@
 
 // AppRegistry.registerComponent('yolo', () => RNRedux);
 
-import startApp from './App';
+import startApp from './App'
 
-startApp();
+startApp()
