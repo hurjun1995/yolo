@@ -16,3 +16,4 @@ export function action(type, payload = {}) {
 // auth
 export const USER = createRequestTypes('USER')
 export const SIGNUP = createRequestTypes('SIGNUP')
+export const LOGIN = createRequestTypes('LOGIN')

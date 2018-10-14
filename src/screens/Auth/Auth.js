@@ -2,17 +2,18 @@
 import * as React from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
-import { Button } from 'react-native-elements'
+import { Button, FormValidationMessage } from 'react-native-elements'
 
 import styles from './styles'
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
 import MainText from '../../components/UI/MainText/MainText'
-import startMainTabs from '../MainTabs/startMainTabs'
 import validate from '../../utility/validation'
-import { signUpAction } from '../../store/actions/auth'
+import { signUpAction, logInAction } from '../../store/actions/auth'
 
 type Props = {
   signUp: Function,
+  logIn: Function,
+  authError: ?string,
 }
 type State = {
   authMode: string,
@@ -50,13 +51,19 @@ class AuthScreen extends React.Component<Props, State> {
     }
   }
 
-  signUpHandler = () => {
+  signUpOrSignInHandler = () => {
     const { controls, authMode } = this.state
-    const { signUp } = this.props
+    const { signUp, logIn } = this.props
     const email = controls.email.value
     const password = controls.password.value
-    if (authMode === 'signUp') signUp(email, password)
-    startMainTabs()
+    if (authMode === 'signUp') {
+      signUp(email, password)
+    } else {
+      logIn(email, password)
+    }
+    // if (!authError) {
+    //   startMainTabs()
+    // }
   }
 
   switchAuthModeHandler = () => {
@@ -121,6 +128,7 @@ class AuthScreen extends React.Component<Props, State> {
   render() {
     const { controls, authMode } = this.state
     const { email, password, confirmPassword } = controls
+    const { authError } = this.props
     let confirmPasswordControl = null
     if (authMode === 'signUp') {
       confirmPasswordControl = (
@@ -137,7 +145,7 @@ class AuthScreen extends React.Component<Props, State> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <MainText>YOLO</MainText>
-        <View style={styles.temp}>
+        <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
             <DefaultInput
               placeholder="Email address"
@@ -156,6 +164,7 @@ class AuthScreen extends React.Component<Props, State> {
               style={styles.input}
             />
             {confirmPasswordControl}
+            {authError && <FormValidationMessage>{authError}</FormValidationMessage>}
           </View>
           <View style={styles.loginSignupContainer}>
             <Button
@@ -171,7 +180,7 @@ class AuthScreen extends React.Component<Props, State> {
               backgroundColor="orange"
               style={styles.loginOrSubmitButton}
               disabled={this.isControlValid()}
-              onPress={this.signUpHandler}
+              onPress={this.signUpOrSignInHandler}
             />
           </View>
         </View>
@@ -179,8 +188,11 @@ class AuthScreen extends React.Component<Props, State> {
     )
   }
 }
+const mapStateToProps = state => ({
+  authError: state.auth.error,
+})
 
 export default connect(
-  null,
-  { signUp: signUpAction },
+  mapStateToProps,
+  { signUp: signUpAction, logIn: logInAction },
 )(AuthScreen)

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: h * 0.08,
   },
-  temp: {
+  formContainer: {
     height: h * 0.3,
   },
   inputContainer: {
