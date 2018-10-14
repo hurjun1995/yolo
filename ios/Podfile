@@ -7,6 +7,7 @@ target 'yolo' do
 
   # Pods for yolo
   pod 'Firebase/Core'
+  pod 'Firebase/Auth', '~> 5.3.0'
 
   target 'yoloTests' do
     inherit! :search_paths

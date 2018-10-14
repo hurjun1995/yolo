@@ -149,6 +149,7 @@ dependencies {
     implementation project(':react-native-navigation')
     implementation "com.google.android.gms:play-services-base:15.0.1" // Firebase dependencies
     implementation "com.google.firebase:firebase-core:16.0.1"
+    implementation "com.google.firebase:firebase-auth:16.0.2" // Firebase Auth
 }
 
 // Run this once to be able to run the application with BUCK

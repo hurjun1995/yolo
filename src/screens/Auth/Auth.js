@@ -2,17 +2,17 @@
 import * as React from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
+import { Button } from 'react-native-elements'
 
 import styles from './styles'
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
 import MainText from '../../components/UI/MainText/MainText'
-import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground'
 import startMainTabs from '../MainTabs/startMainTabs'
 import validate from '../../utility/validation'
-import { tryAuth } from '../../store/actions/index'
+import { signUpAction } from '../../store/actions/auth'
 
 type Props = {
-  onLogin: (authData: Object) => void,
+  signUp: Function,
 }
 type State = {
   authMode: string,
@@ -50,31 +50,29 @@ class AuthScreen extends React.Component<Props, State> {
     }
   }
 
-  loginHandler = () => {
-    const { controls } = this.state
-    const { onLogin } = this.props
-    const authData = {
-      email: controls.email.value,
-      password: controls.password.value,
-    }
-    onLogin(authData)
+  signUpHandler = () => {
+    const { controls, authMode } = this.state
+    const { signUp } = this.props
+    const email = controls.email.value
+    const password = controls.password.value
+    if (authMode === 'signUp') signUp(email, password)
     startMainTabs()
   }
 
   switchAuthModeHandler = () => {
     this.setState(prevState => ({
-      authMode: prevState.authMode === 'login' ? 'signup' : 'login',
+      authMode: prevState.authMode === 'login' ? 'signUp' : 'login',
     }))
   }
 
-  // email = true, pwrd = true, cp = true, am: authMode = 'signup'
+  // email = true, pwrd = true, cp = true, am: authMode = 'signUp'
   // !(email ^ pwrd ^ ((cp ^ am) v !am))
   // !(email ^ pwrd ^ (cp v !am))
   // !email v !pwrd v (!cp ^ am)
   isControlValid = () => {
     const { controls, authMode } = this.state
     return (
-      (!controls.confirmPassword.valid && authMode === 'signup')
+      (!controls.confirmPassword.valid && authMode === 'signUp')
       || !controls.email.valid
       || !controls.password.valid
     )
@@ -124,57 +122,65 @@ class AuthScreen extends React.Component<Props, State> {
     const { controls, authMode } = this.state
     const { email, password, confirmPassword } = controls
     let confirmPasswordControl = null
-    if (authMode === 'signup') {
+    if (authMode === 'signUp') {
       confirmPasswordControl = (
         <DefaultInput
           placeholder="Confirm Password"
           value={confirmPassword.value}
           onChangeText={val => this.updateInputState('confirmPassword', val)}
           secureTextEntry
+          style={styles.input}
         />
       )
     }
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <MainText>YOLO</MainText>
-        <ButtonWithBackground color="#ffb347" onPress={this.switchAuthModeHandler}>
-          Switch to
-          {authMode === 'login' ? ' Sign Up' : ' Login'}
-        </ButtonWithBackground>
-        <View style={styles.inputContainer}>
-          <DefaultInput
-            placeholder="Email address"
-            value={email.value}
-            onChangeText={val => this.updateInputState('email', val)}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-          />
-          <DefaultInput
-            placeholder="Password"
-            value={password.value}
-            onChangeText={val => this.updateInputState('password', val)}
-            secureTextEntry
-          />
-          {confirmPasswordControl}
+        <View style={styles.temp}>
+          <View style={styles.inputContainer}>
+            <DefaultInput
+              placeholder="Email address"
+              value={email.value}
+              onChangeText={val => this.updateInputState('email', val)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              style={styles.input}
+            />
+            <DefaultInput
+              placeholder="Password"
+              value={password.value}
+              onChangeText={val => this.updateInputState('password', val)}
+              secureTextEntry
+              style={styles.input}
+            />
+            {confirmPasswordControl}
+          </View>
+          <View style={styles.loginSignupContainer}>
+            <Button
+              title={`Switch to ${authMode === 'login' ? ' Sign Up' : ' Login'}`}
+              backgroundColor="orange"
+              rounded
+              style={styles.loginOrSignupButton}
+              onPress={this.switchAuthModeHandler}
+            />
+            <Button
+              title={authMode === 'login' ? 'Login' : ' Submit'}
+              rounded
+              backgroundColor="orange"
+              style={styles.loginOrSubmitButton}
+              disabled={this.isControlValid()}
+              onPress={this.signUpHandler}
+            />
+          </View>
         </View>
-        <ButtonWithBackground
-          color="#ffb347"
-          onPress={this.loginHandler}
-          disabled={this.isControlValid()}
-        >
-          {authMode === 'login' ? 'Login' : ' Submit'}
-        </ButtonWithBackground>
       </KeyboardAvoidingView>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onLogin: authData => dispatch(tryAuth(authData)),
-})
-
 export default connect(
   null,
-  mapDispatchToProps,
+  { signUp: signUpAction },
 )(AuthScreen)

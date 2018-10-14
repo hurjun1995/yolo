@@ -1,17 +1,34 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { platformSpecific } from '../../utility/util'
+import { StyleSheet } from 'react-native'
 
-const { height } = Dimensions.get('window')
+import { getWidthAndHeight } from '../../utility/util'
 
+const { h } = getWidthAndHeight()
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: platformSpecific(height * 0.15, height * 0.05),
+    marginTop: h * 0.08,
+  },
+  temp: {
+    height: h * 0.3,
   },
   inputContainer: {
-    width: '85%',
+    flex: 2,
+  },
+  input: {
+    flex: 1,
+    alignSelf: 'stretch',
+  },
+  loginSignupContainer: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  loginOrSignupButton: {
+    flex: 7,
+  },
+  loginOrSubmitButton: {
+    flex: 3,
   },
 })
 

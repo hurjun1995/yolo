@@ -1,8 +1,13 @@
-import { Navigation } from 'react-native-navigation';
-import registerScreens from './src/screens';
+import React, { Component } from 'react'
+import { Navigation } from 'react-native-navigation'
+import firebase from 'react-native-firebase'
+
+import AuthScreen from './src/screens/Auth/Auth'
+import startMainTabs from './src/screens/MainTabs/startMainTabs'
+import registerScreens from './src/screens'
 
 const startApp = () => {
-  registerScreens();
+  registerScreens()
   Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
       root: {
@@ -21,8 +26,40 @@ const startApp = () => {
           ],
         },
       },
-    });
-  });
-};
+    })
+  })
+}
+type States = {
+  user: ?Object,
+}
 
-export default startApp;
+export class App extends Component<{}, States> {
+  constructor(props) {
+    super(props)
+    this.firebaseAuthListener = null
+    this.state = {
+      user: null,
+    }
+  }
+
+  componentDidMount() {
+    this.firebaseAuthListener = firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ user })
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.firebaseAuthListener) {
+      this.firebaseAuthListener()
+    }
+  }
+
+  firebaseAuthListener: ?Function
+
+  render() {
+    const { user } = this.state
+    return user ? startMainTabs() : <AuthScreen />
+  }
+}
+
+export default startApp
