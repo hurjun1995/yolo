@@ -2,17 +2,18 @@
 import * as React from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
-import { Button, FormValidationMessage } from 'react-native-elements'
+import { Button, FormValidationMessage, SocialIcon } from 'react-native-elements'
 
 import styles from './styles'
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
 import MainText from '../../components/UI/MainText/MainText'
 import validate from '../../utility/validation'
-import { signUpAction, logInAction } from '../../store/actions/auth'
+import { signUpAction, logInAction, fbSignUpAction } from '../../store/actions/auth'
 
 type Props = {
   signUp: Function,
   logIn: Function,
+  fbSignUp: Function,
   authError: ?string,
 }
 type State = {
@@ -128,7 +129,7 @@ class AuthScreen extends React.Component<Props, State> {
   render() {
     const { controls, authMode } = this.state
     const { email, password, confirmPassword } = controls
-    const { authError } = this.props
+    const { authError, fbSignUp } = this.props
     let confirmPasswordControl = null
     if (authMode === 'signUp') {
       confirmPasswordControl = (
@@ -183,6 +184,9 @@ class AuthScreen extends React.Component<Props, State> {
               onPress={this.signUpOrSignInHandler}
             />
           </View>
+          <View style={styles.socialLoginContainer}>
+            <SocialIcon type="facebook" onPress={fbSignUp} />
+          </View>
         </View>
       </KeyboardAvoidingView>
     )
@@ -194,5 +198,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { signUp: signUpAction, logIn: logInAction },
+  { signUp: signUpAction, logIn: logInAction, fbSignUp: fbSignUpAction },
 )(AuthScreen)

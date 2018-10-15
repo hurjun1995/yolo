@@ -2,7 +2,7 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const {
-  SIGNUP, LOGIN, SUCCESS, FAILURE,
+  SIGNUP, LOGIN, FBSIGNIN, SUCCESS, FAILURE,
 } = actionTypes
 
 type Action = {
@@ -24,12 +24,14 @@ function authReducer(state: States = initialState, action: Action) {
   switch (type) {
     case SIGNUP[SUCCESS]:
     case LOGIN[SUCCESS]:
+    case FBSIGNIN[SUCCESS]:
       return {
         ...state,
         user: userCredential.user,
       }
     case SIGNUP[FAILURE]:
     case LOGIN[FAILURE]:
+    case FBSIGNIN[FAILURE]:
       return {
         ...state,
         error,

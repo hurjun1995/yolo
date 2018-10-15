@@ -6,9 +6,10 @@ import * as api from '../../api/auth'
 import startMainTabs from '../../screens/MainTabs/startMainTabs'
 
 const {
-  SIGNUP, LOGIN, REQUEST, SUCCESS, FAILURE,
+  SIGNUP, LOGIN, FBSIGNIN, REQUEST, SUCCESS, FAILURE,
 } = actions
 
+// all kinds of SignUp might be able to be unified?
 function* signUp(email, password) {
   let userCredential = null
   try {
@@ -17,6 +18,21 @@ function* signUp(email, password) {
     yield call(startMainTabs)
   } catch (error) {
     yield put({ type: SIGNUP[FAILURE], error })
+  }
+  return userCredential
+}
+
+function* fbSignIn() {
+  let userCredential
+  try {
+    const credential = yield call(api.getFacebookCredential)
+    userCredential = yield call(api.signInWithCredential, credential)
+    yield put({ type: LOGIN[SUCCESS], userCredential })
+    yield call(startMainTabs)
+  } catch (error) {
+    if (error.message !== 'FBSIGNIN_CANCELLED') {
+      yield put({ type: FBSIGNIN[FAILURE], error })
+    }
   }
   return userCredential
 }
@@ -39,6 +55,13 @@ export function* watchSignUp() {
   while (true) {
     const { email, password } = yield take(SIGNUP[REQUEST])
     yield call(signUp, email, password)
+  }
+}
+
+export function* watchFBSignIn() {
+  while (true) {
+    yield take(FBSIGNIN[REQUEST])
+    yield call(fbSignIn)
   }
 }
 

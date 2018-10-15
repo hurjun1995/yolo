@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     marginTop: h * 0.08,
   },
   formContainer: {
-    height: h * 0.3,
+    height: h * 0.4,
   },
   inputContainer: {
     flex: 2,
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
   },
   loginOrSubmitButton: {
     flex: 3,
+  },
+  socialLoginContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
 })
 

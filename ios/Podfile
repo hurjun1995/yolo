@@ -9,6 +9,12 @@ target 'yolo' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth', '~> 5.3.0'
 
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+'DevSupport', 'RCTNetwork']
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
   target 'yoloTests' do
     inherit! :search_paths
     # Pods for testing
