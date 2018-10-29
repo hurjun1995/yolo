@@ -93,7 +93,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "com.yolo"
@@ -152,6 +152,11 @@ dependencies {
     implementation "com.google.android.gms:play-services-base:15.0.1" // Firebase dependencies
     implementation "com.google.firebase:firebase-core:16.0.1"
     implementation "com.google.firebase:firebase-auth:16.0.2" // Firebase Auth
+    //implementation project(':react-native-google-signin')     // Google authentication
+    implementation(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms" // very important
+    }
+    implementation 'com.google.android.gms:play-services-auth:15.0.0' // should be at least 15.0.0 to work with the most recent APIs
 }
 
 // Run this once to be able to run the application with BUCK
@@ -162,3 +167,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

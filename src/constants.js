@@ -1,0 +1,3 @@
+export const FACEBOOK = 'FACEBOOK'
+export const GOOGLE = 'GOOGLE'
+export const FBSIGNIN_CANCELLED = 'FBSIGNIN_CANCELLED'

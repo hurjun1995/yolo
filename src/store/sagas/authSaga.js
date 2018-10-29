@@ -4,9 +4,10 @@ import { take, put, call } from 'redux-saga/effects'
 import * as actions from '../actions/actionTypes'
 import * as api from '../../api/auth'
 import startMainTabs from '../../screens/MainTabs/startMainTabs'
+import { FACEBOOK, GOOGLE, FBSIGNIN_CANCELLED } from '../../constants'
 
 const {
-  SIGNUP, LOGIN, FBSIGNIN, REQUEST, SUCCESS, FAILURE,
+  SIGNUP, LOGIN, SOCIALSIGNIN, REQUEST, SUCCESS, FAILURE,
 } = actions
 
 // all kinds of SignUp might be able to be unified?
@@ -22,16 +23,27 @@ function* signUp(email, password) {
   return userCredential
 }
 
-function* fbSignIn() {
+function* socialAccountSignin(socialType) {
   let userCredential
   try {
-    const credential = yield call(api.getFacebookCredential)
+    let credential
+    if (socialType === FACEBOOK) {
+      credential = yield call(api.getFacebookCredential)
+    } else {
+      credential = yield call(api.getGoogleCredential)
+    }
     userCredential = yield call(api.signInWithCredential, credential)
     yield put({ type: LOGIN[SUCCESS], userCredential })
     yield call(startMainTabs)
   } catch (error) {
-    if (error.message !== 'FBSIGNIN_CANCELLED') {
-      yield put({ type: FBSIGNIN[FAILURE], error })
+    // checks if signIn is cancelled
+    // if yes, don't show error message
+    // -5 is error code for google-login-cancelled
+    if (
+      (socialType === FACEBOOK && error.message !== FBSIGNIN_CANCELLED)
+      || (socialType === GOOGLE && error.code !== '-5')
+    ) {
+      yield put({ type: LOGIN[FAILURE], error: error.message })
     }
   }
   return userCredential
@@ -58,10 +70,10 @@ export function* watchSignUp() {
   }
 }
 
-export function* watchFBSignIn() {
+export function* watchSocialAccountSignIn() {
   while (true) {
-    yield take(FBSIGNIN[REQUEST])
-    yield call(fbSignIn)
+    const { socialType } = yield take(SOCIALSIGNIN[REQUEST])
+    yield call(socialAccountSignin, socialType)
   }
 }
 

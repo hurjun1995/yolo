@@ -5298,6 +5298,10 @@ react-native-firebase@^4.3.8:
     postinstall-build "^5.0.1"
     prop-types "^15.6.1"
 
+react-native-google-signin@^1.0.0-rc6:
+  version "1.0.0-rc6"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.0-rc6.tgz#13278e39551d127008e76a9c6caf532f04246f17"
+
 react-native-navigation@^2.0.2538:
   version "2.0.2538"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.2538.tgz#cfc87a7e995415471809e7c7d1c3327509b2ef8a"

@@ -7,13 +7,15 @@ import { Button, FormValidationMessage, SocialIcon } from 'react-native-elements
 import styles from './styles'
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
 import MainText from '../../components/UI/MainText/MainText'
+import TextButton from '../../components/UI/TextButton/TextButton'
 import validate from '../../utility/validation'
-import { signUpAction, logInAction, fbSignUpAction } from '../../store/actions/auth'
+import { signUpAction, logInAction, socialAccountSignInAction } from '../../store/actions/auth'
+import { FACEBOOK, GOOGLE } from '../../constants'
 
 type Props = {
   signUp: Function,
   logIn: Function,
-  fbSignUp: Function,
+  socialAccountSignIn: Function,
   authError: ?string,
 }
 type State = {
@@ -129,7 +131,19 @@ class AuthScreen extends React.Component<Props, State> {
   render() {
     const { controls, authMode } = this.state
     const { email, password, confirmPassword } = controls
-    const { authError, fbSignUp } = this.props
+    const { authError, socialAccountSignIn } = this.props
+    const {
+      container,
+      formContainer,
+      inputContainer,
+      input,
+      loginOrSubmitButton,
+      signupSwitcher,
+      socialLoginContainer,
+      socialLoginButton,
+      loginOrSubmitButtonContainer,
+      signUpSwitcherText,
+    } = styles
     let confirmPasswordControl = null
     if (authMode === 'signUp') {
       confirmPasswordControl = (
@@ -144,10 +158,10 @@ class AuthScreen extends React.Component<Props, State> {
     }
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={container}>
         <MainText>YOLO</MainText>
-        <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
+        <View style={formContainer}>
+          <View style={inputContainer}>
             <DefaultInput
               placeholder="Email address"
               value={email.value}
@@ -155,37 +169,48 @@ class AuthScreen extends React.Component<Props, State> {
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="email-address"
-              style={styles.input}
+              style={input}
             />
             <DefaultInput
               placeholder="Password"
               value={password.value}
               onChangeText={val => this.updateInputState('password', val)}
               secureTextEntry
-              style={styles.input}
+              style={input}
             />
             {confirmPasswordControl}
             {authError && <FormValidationMessage>{authError}</FormValidationMessage>}
           </View>
-          <View style={styles.loginSignupContainer}>
-            <Button
-              title={`Switch to ${authMode === 'login' ? ' Sign Up' : ' Login'}`}
-              backgroundColor="orange"
-              rounded
-              style={styles.loginOrSignupButton}
-              onPress={this.switchAuthModeHandler}
+          <Button
+            containerViewStyle={loginOrSubmitButtonContainer}
+            buttonStyle={loginOrSubmitButton}
+            title={authMode === 'login' ? 'Login' : ' Submit'}
+            backgroundColor="orange"
+            disabled={this.isControlValid()}
+            onPress={this.signUpOrSignInHandler}
+          />
+          <View style={socialLoginContainer}>
+            <SocialIcon
+              title="FACEBOOK"
+              button
+              style={socialLoginButton}
+              type="facebook"
+              onPress={() => socialAccountSignIn(FACEBOOK)}
             />
-            <Button
-              title={authMode === 'login' ? 'Login' : ' Submit'}
-              rounded
-              backgroundColor="orange"
-              style={styles.loginOrSubmitButton}
-              disabled={this.isControlValid()}
-              onPress={this.signUpOrSignInHandler}
+            <SocialIcon
+              title="GOOGLE"
+              button
+              type="google-plus-official"
+              style={socialLoginButton}
+              onPress={() => socialAccountSignIn(GOOGLE)}
             />
           </View>
-          <View style={styles.socialLoginContainer}>
-            <SocialIcon type="facebook" onPress={fbSignUp} />
+          <View style={signupSwitcher}>
+            <TextButton
+              style={signUpSwitcherText}
+              title={`Switch to ${authMode === 'login' ? ' Sign Up' : ' Login'}`}
+              onPress={this.switchAuthModeHandler}
+            />
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -198,5 +223,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { signUp: signUpAction, logIn: logInAction, fbSignUp: fbSignUpAction },
+  { signUp: signUpAction, logIn: logInAction, socialAccountSignIn: socialAccountSignInAction },
 )(AuthScreen)

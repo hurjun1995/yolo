@@ -44,6 +44,11 @@
 		490C973B927A4FA6BB756981 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D24A9A7E8AB4E64B3B10AA1 /* SimpleLineIcons.ttf */; };
 		576D3754A8164DC69CA0B017 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA9BB85AA2EC490FB6D718EA /* MaterialIcons.ttf */; };
 		67313E4440B74EA7B13ABAF1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8045CFF920BC44DABAEDCAE4 /* EvilIcons.ttf */; };
+		6A11691C217719CE001A4E3D /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A11691B217719CE001A4E3D /* libRNGoogleSignin.a */; };
+		6A116947217719D8001A4E3D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A116946217719D8001A4E3D /* AddressBook.framework */; };
+		6A116949217719DF001A4E3D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A116948217719DE001A4E3D /* SafariServices.framework */; };
+		6A11694B217719E6001A4E3D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A11694A217719E6001A4E3D /* SystemConfiguration.framework */; };
+		6A11694D217719ED001A4E3D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A11694C217719ED001A4E3D /* libz.tbd */; };
 		6A4580DB2161528600BA5371 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6AB2479E21706B2F00FEF15E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AB2479D21706B2F00FEF15E /* GoogleService-Info.plist */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -398,6 +403,11 @@
 		4D24A9A7E8AB4E64B3B10AA1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5C18EFF75FB65CE0D05CAAC6 /* Pods-yoloTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoloTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoloTests/Pods-yoloTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6A11691B217719CE001A4E3D /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A116946217719D8001A4E3D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		6A116948217719DE001A4E3D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		6A11694A217719E6001A4E3D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6A11694C217719ED001A4E3D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		6A20E40021743CC400FC35D2 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A20E42B21743CCC00FC35D2 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKLoginKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A20E42D21743CCC00FC35D2 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -445,6 +455,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A11694D217719ED001A4E3D /* libz.tbd in Frameworks */,
+				6A11694B217719E6001A4E3D /* SystemConfiguration.framework in Frameworks */,
+				6A116949217719DF001A4E3D /* SafariServices.framework in Frameworks */,
+				6A116947217719D8001A4E3D /* AddressBook.framework in Frameworks */,
+				6A11691C217719CE001A4E3D /* libRNGoogleSignin.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -613,6 +628,11 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A11694C217719ED001A4E3D /* libz.tbd */,
+				6A11694A217719E6001A4E3D /* SystemConfiguration.framework */,
+				6A116948217719DE001A4E3D /* SafariServices.framework */,
+				6A116946217719D8001A4E3D /* AddressBook.framework */,
+				6A11691B217719CE001A4E3D /* libRNGoogleSignin.a */,
 				6A20E42F21743D1F00FC35D2 /* libreact-native-fbsdk.a */,
 				6A20E42B21743CCC00FC35D2 /* libFBSDKLoginKit.a */,
 				6A20E42D21743CCC00FC35D2 /* libFBSDKShareKit.a */,
@@ -1332,12 +1352,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-yolo/Pods-yolo-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -23,6 +24,7 @@ import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 
 import com.oblador.vectoricons.VectorIconsPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +60,8 @@ public class MainApplication extends NavigationApplication {
             new VectorIconsPackage(),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
-            new FBSDKPackage(mCallbackManager)
+            new FBSDKPackage(mCallbackManager),
+            new RNGoogleSigninPackage()
     );
   }
 

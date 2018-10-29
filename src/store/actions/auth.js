@@ -1,8 +1,7 @@
-/* eslint import/prefer-default-export: 0 */
 import * as actions from './actionTypes'
 
 const {
-  action, USER, SIGNUP, LOGIN, FBSIGNIN, REQUEST, SUCCESS, FAILURE,
+  action, USER, SIGNUP, LOGIN, FBSIGNIN, SOCIALSIGNIN, REQUEST, SUCCESS, FAILURE,
 } = actions
 
 export const user = {
@@ -14,6 +13,7 @@ export const user = {
 export const signUpAction = (email, password) => action(SIGNUP[REQUEST], { email, password })
 export const logInAction = (email, password) => action(LOGIN[REQUEST], { email, password })
 export const fbSignUpAction = () => action(FBSIGNIN[REQUEST])
+export const socialAccountSignInAction = socialType => action(SOCIALSIGNIN[REQUEST], { socialType })
 
 // export const signUp = {
 //   request: (email, password) => action(SIGNUP[REQUEST], { email, password }),
