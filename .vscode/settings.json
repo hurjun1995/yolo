@@ -13,5 +13,6 @@
   "javascript.validate.enable": false,
   // Enable/disable default JavaScript formatter (For Prettier)
   "javascript.format.enable": false,
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "prettier.singleQuote": true
 }

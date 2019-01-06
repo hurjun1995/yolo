@@ -5,7 +5,7 @@ import {
 import createSagaMiddleware from 'redux-saga'
 import { createLogger } from 'redux-logger'
 
-import authReducer from './reducers/authReducer'
+import { authReducer } from './reducers/authReducer'
 import rootSaga from './sagas'
 
 const rootReducer = combineReducers({

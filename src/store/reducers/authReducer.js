@@ -14,12 +14,12 @@ type States = {
   user: ?Object,
   error: ?string,
 }
-const initialState = {
+export const initialState = {
   user: null,
   error: null,
 }
 
-function authReducer(state: States = initialState, action: Action) {
+export const authReducer = (state: States = initialState, action: Action) => {
   const { type, userCredential, error } = action
   switch (type) {
     case SIGNUP[SUCCESS]:
@@ -42,5 +42,3 @@ function authReducer(state: States = initialState, action: Action) {
       return state
   }
 }
-
-export default authReducer

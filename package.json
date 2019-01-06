@@ -19,7 +19,8 @@
     "jest": "^23.5.0",
     "jest-react-native": "^18.0.0",
     "react-dom": "^16.5.2",
-    "react-test-renderer": "16.3.1"
+    "react-test-renderer": "16.3.1",
+    "redux-saga-test-plan": "^3.7.0"
   },
   "scripts": {
     "start": "react-native start",
@@ -37,12 +38,8 @@
     "testMatch": [
       "**/?(*.)test.js?(x)"
     ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFiles": [
-      "<rootDir>/jest/setup.js"
-    ]
+    "setupTestFrameworkScriptFile": "<rootDir>/src/__mock__/mockForTests",
+    "automock": false
   },
   "dependencies": {
     "babel-core": "^6.26.3",
