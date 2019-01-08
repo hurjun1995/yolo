@@ -2,17 +2,22 @@
 import * as React from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
+import { Button, FormValidationMessage, SocialIcon } from 'react-native-elements'
 
 import styles from './styles'
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput'
 import MainText from '../../components/UI/MainText/MainText'
-import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground'
-import startMainTabs from '../MainTabs/startMainTabs'
+import TextButton from '../../components/UI/TextButton/TextButton'
+// import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground'
+// import startMainTabs from '../MainTabs/startMainTabs'
 import validate from '../../utility/validation'
-import { tryAuth } from '../../store/actions/index'
+import { signUpAction, logInAction } from '../../store/actions/auth'
+// import { FACEBOOK, GOOGLE } from '../../constants'
 
 type Props = {
-  onLogin: (authData: Object) => void,
+  signUp: Function,
+  logIn: Function,
+  authError: ?string,
 }
 type State = {
   authMode: string,
@@ -50,31 +55,36 @@ class AuthScreen extends React.Component<Props, State> {
     }
   }
 
-  loginHandler = () => {
-    const { controls } = this.state
-    const { onLogin } = this.props
-    const authData = {
-      email: controls.email.value,
-      password: controls.password.value,
+  signUpOrSignInHandler = () => {
+    const { controls, authMode } = this.state
+    const { signUp, logIn } = this.props
+    const email = controls.email.value
+    const password = controls.password.value
+    if (authMode === 'signUp') {
+      signUp(email, password)
+    } else {
+      logIn(email, password)
     }
-    onLogin(authData)
-    startMainTabs()
+
+    // if (!authError) {
+    //   startMainTabs()
+    // }
   }
 
   switchAuthModeHandler = () => {
     this.setState(prevState => ({
-      authMode: prevState.authMode === 'login' ? 'signup' : 'login',
+      authMode: prevState.authMode === 'login' ? 'signUp' : 'login',
     }))
   }
 
-  // email = true, pwrd = true, cp = true, am: authMode = 'signup'
+  // email = true, pwrd = true, cp = true, am: authMode = 'signUp'
   // !(email ^ pwrd ^ ((cp ^ am) v !am))
   // !(email ^ pwrd ^ (cp v !am))
   // !email v !pwrd v (!cp ^ am)
   isControlValid = () => {
     const { controls, authMode } = this.state
     return (
-      (!controls.confirmPassword.valid && authMode === 'signup')
+      (!controls.confirmPassword.valid && authMode === 'signUp')
       || !controls.email.valid
       || !controls.password.valid
     )
@@ -123,58 +133,103 @@ class AuthScreen extends React.Component<Props, State> {
   render() {
     const { controls, authMode } = this.state
     const { email, password, confirmPassword } = controls
+    const { authError } = this.props
+    const {
+      container,
+      formContainer,
+      inputContainer,
+      input,
+      loginOrSubmitButton,
+      signupSwitcher,
+      socialLoginContainer,
+      socialLoginButton,
+      loginOrSubmitButtonContainer,
+      signUpSwitcherText,
+    } = styles
     let confirmPasswordControl = null
-    if (authMode === 'signup') {
+
+    if (authMode === 'signUp') {
       confirmPasswordControl = (
         <DefaultInput
           placeholder="Confirm Password"
           value={confirmPassword.value}
           onChangeText={val => this.updateInputState('confirmPassword', val)}
           secureTextEntry
+          style={styles.input}
         />
       )
     }
+
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={container}>
         <MainText>YOLO</MainText>
-        <ButtonWithBackground color="#ffb347" onPress={this.switchAuthModeHandler}>
-          Switch to
-          {authMode === 'login' ? ' Sign Up' : ' Login'}
-        </ButtonWithBackground>
-        <View style={styles.inputContainer}>
-          <DefaultInput
-            placeholder="Email address"
-            value={email.value}
-            onChangeText={val => this.updateInputState('email', val)}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
+        <View style={formContainer}>
+          <View style={inputContainer}>
+            <DefaultInput
+              placeholder="Email address"
+              value={email.value}
+              onChangeText={val => this.updateInputState('email', val)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              style={input}
+            />
+            <DefaultInput
+              placeholder="Password"
+              value={password.value}
+              onChangeText={val => this.updateInputState('password', val)}
+              secureTextEntry
+              style={input}
+            />
+            {confirmPasswordControl}
+            {authError && <FormValidationMessage>{authError}</FormValidationMessage>}
+          </View>
+          <Button
+            containerViewStyle={loginOrSubmitButtonContainer}
+            buttonStyle={loginOrSubmitButton}
+            title={authMode === 'login' ? 'Login' : ' Submit'}
+            backgroundColor="orange"
+            disabled={this.isControlValid()}
+            onPress={this.signUpOrSignInHandler}
           />
-          <DefaultInput
-            placeholder="Password"
-            value={password.value}
-            onChangeText={val => this.updateInputState('password', val)}
-            secureTextEntry
-          />
-          {confirmPasswordControl}
+          <View style={socialLoginContainer}>
+            <SocialIcon
+              title="FACEBOOK"
+              button
+              style={socialLoginButton}
+              type="facebook"
+              // onPress={() => socialAccountSignIn(FACEBOOK)}
+            />
+            <SocialIcon
+              title="GOOGLE"
+              button
+              type="google-plus-official"
+              style={socialLoginButton}
+              // onPress={() => socialAccountSignIn(GOOGLE)}
+            />
+          </View>
+          <View style={signupSwitcher}>
+            <TextButton
+              style={signUpSwitcherText}
+              title={`Switch to ${authMode === 'login' ? ' Sign Up' : ' Login'}`}
+              onPress={this.switchAuthModeHandler}
+            />
+          </View>
         </View>
-        <ButtonWithBackground
-          color="#ffb347"
-          onPress={this.loginHandler}
-          disabled={this.isControlValid()}
-        >
-          {authMode === 'login' ? 'Login' : ' Submit'}
-        </ButtonWithBackground>
       </KeyboardAvoidingView>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onLogin: authData => dispatch(tryAuth(authData)),
+const mapStateToProps = state => ({
+  authError: state.auth.error,
 })
 
 export default connect(
-  null,
-  mapDispatchToProps,
+  mapStateToProps,
+  {
+    signUp: signUpAction,
+    logIn: logInAction,
+    // </KeyboardAvoidingView>socialAccountSignIn: socialAccountSignInAction
+  },
 )(AuthScreen)

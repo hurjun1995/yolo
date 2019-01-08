@@ -8,6 +8,8 @@
     "react/forbid-prop-types": [0, { "forbid": [] }],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
+    "import/prefer-default-export": 0,
+    "linebreak-style": 0,
     "import/extensions": [1, "never", { "svg": "always" }],
     "import/no-extraneous-dependencies": [
       "error",
