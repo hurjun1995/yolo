@@ -1,9 +1,22 @@
+// @flow
 import axios from 'axios'
 import { v1LocalhostBaseUrl } from '../constants'
 
-export function sendRequestAsync(method, uri, body, headers = {}) {
-  const authToken = {} // TODO: getToken()
+/**
+ * Send http request with provided JWT token
+ * 
+ * 
+ * @param String method
+ * @param String authToken
+ * @param String uri
+ * @param Object body
+ * @param Object header       if not provided, default is {} 
+ * 
+ * @returns 
+ */
+export function sendRequestWithJWTAuthHeaderAsync(method, authToken, uri, body, headers = {}) {
   const authHeader = authToken == null ? {} : { Authorization: `Bearer ${authToken}` }
+
   const config = {
     method: String.toLowerCase(method),
     url: uri,

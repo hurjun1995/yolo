@@ -2,7 +2,7 @@ import firebase from 'react-native-firebase'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import { GoogleSignin } from 'react-native-google-signin'
 
-import { sendRequestAsync } from '../utility/http'
+import { sendRequestWithJWTAuthHeaderAsync } from '../utility/http'
 import { FBSIGNIN_CANCELLED, CHECK_YOUR_EMAIL_AND_PASSWORD_MESSAGE } from '../constants'
 
 export function signUp(email, password) {
@@ -12,7 +12,7 @@ export function signUp(email, password) {
 
 export function logIn(email, password) {
   // TODO: decide on what to return from response object
-  return sendRequestAsync('POST', '/user/login', { email, password })
+  return sendRequestWithJWTAuthHeaderAsync('POST', '/user/login', { email, password })
 }
 
 export function signInWithCredential(credential) {
