@@ -60,15 +60,12 @@ class AuthScreen extends React.Component<Props, State> {
     const { signUp, logIn } = this.props
     const email = controls.email.value
     const password = controls.password.value
+
     if (authMode === 'signUp') {
       signUp(email, password)
     } else {
       logIn(email, password)
     }
-
-    // if (!authError) {
-    //   startMainTabs()
-    // }
   }
 
   switchAuthModeHandler = () => {
@@ -198,6 +195,7 @@ class AuthScreen extends React.Component<Props, State> {
               button
               style={socialLoginButton}
               type="facebook"
+              // TODO:
               // onPress={() => socialAccountSignIn(FACEBOOK)}
             />
             <SocialIcon
@@ -205,6 +203,7 @@ class AuthScreen extends React.Component<Props, State> {
               button
               type="google-plus-official"
               style={socialLoginButton}
+              // TODO:
               // onPress={() => socialAccountSignIn(GOOGLE)}
             />
           </View>
@@ -222,7 +221,7 @@ class AuthScreen extends React.Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-  authError: state.auth.error,
+  authError: state.auth.error.message,
 })
 
 export default connect(
@@ -230,6 +229,6 @@ export default connect(
   {
     signUp: signUpAction,
     logIn: logInAction,
-    // </KeyboardAvoidingView>socialAccountSignIn: socialAccountSignInAction
+    // socialAccountSignIn: socialAccountSignInAction
   },
 )(AuthScreen)

@@ -7,28 +7,35 @@ const {
 
 type Action = {
   type: string,
-  userCredential: Object,
+  response: Object,
   error: Object,
 }
 type States = {
   user: ?Object,
-  error: ?string,
+  token: ?string,
+  error: ?Object,
 }
 export const initialState = {
   user: null,
+  token: null,
   error: null,
 }
 
 export const authReducer = (state: States = initialState, action: Action) => {
-  const { type, userCredential, error } = action
+  const { type, response, error } = action
   switch (type) {
     case SIGNUP[SUCCESS]:
+      return {
+        ...state,
+        user: response.user,
+      }
     case LOGIN[SUCCESS]:
     case FBSIGNIN[SUCCESS]:
     case GOOGLESIGNIN[SUCCESS]:
       return {
         ...state,
-        user: userCredential.user,
+        user: response.user,
+        token: response.token.split(' ')[1],
       }
     case SIGNUP[FAILURE]:
     case LOGIN[FAILURE]:

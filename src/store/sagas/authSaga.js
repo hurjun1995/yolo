@@ -18,18 +18,19 @@ const {
 
 // all kinds of SignUp might be able to be unified?
 export function* signUp(email, password) {
-  let userCredential = null
+  let user
   try {
-    userCredential = yield call(api.signUp, email, password)
-    yield put({ type: SIGNUP[SUCCESS], userCredential })
+    user = yield call(api.signUp, email, password)
+    yield put({ type: SIGNUP[SUCCESS], user })
     yield call(startMainTabs)
   } catch (error) {
-    yield put({ type: SIGNUP[FAILURE], error: error.message })
+    yield put({ type: SIGNUP[FAILURE], error })
   }
-  return userCredential
+  return user
 }
 
 export function* socialAccountSignin(socialType) {
+  // TODO: refactor this function to use yolobackend
   let userCredential
   try {
     let credential
@@ -48,31 +49,29 @@ export function* socialAccountSignin(socialType) {
       (socialType === FACEBOOK && error.message !== FBSIGNIN_CANCELLED)
       || (socialType === GOOGLE && error.code !== GOOGLE_SIGNIN_CANCEL_ERROR_CODE)
     ) {
-      yield put({ type: LOGIN[FAILURE], error: error.message })
+      yield put({ type: LOGIN[FAILURE], error })
     }
   }
   return userCredential
 }
 
 export function* logIn(email, password) {
-  let userCredential = null
+  let response
   try {
-    userCredential = yield call(api.logIn, email, password)
-    yield put({ type: LOGIN[SUCCESS], userCredential })
+    response = yield call(api.logIn, email, password)
+    yield put({ type: LOGIN[SUCCESS], response })
     yield call(startMainTabs)
   } catch (error) {
-    yield put({ type: LOGIN[FAILURE], error: CHECK_YOUR_EMAIL_AND_PASSWORD_MESSAGE })
+    yield put({ type: LOGIN[FAILURE], error: new Error(CHECK_YOUR_EMAIL_AND_PASSWORD_MESSAGE) })
   }
-  return userCredential
+  return response
 }
 
 // ****************************WATCHER**************************** //
 
 export function* watchSignUp() {
   while (true) {
-    console.log('BEFORE call take in watchSignUp')
     const { email, password } = yield take(SIGNUP[REQUEST])
-    console.log('AFTER call take in watchSignUp')
     yield call(signUp, email, password)
   }
 }
