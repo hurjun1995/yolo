@@ -17,7 +17,7 @@ import { signUpAction, logInAction } from '../../store/actions/auth'
 type Props = {
   signUp: Function,
   logIn: Function,
-  authError: ?string,
+  authError: ?Object,
 }
 type State = {
   authMode: string,
@@ -179,7 +179,7 @@ class AuthScreen extends React.Component<Props, State> {
               style={input}
             />
             {confirmPasswordControl}
-            {authError && <FormValidationMessage>{authError}</FormValidationMessage>}
+            {authError && <FormValidationMessage>{authError.message}</FormValidationMessage>}
           </View>
           <Button
             containerViewStyle={loginOrSubmitButtonContainer}
@@ -221,7 +221,7 @@ class AuthScreen extends React.Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-  authError: state.auth.error.message,
+  authError: state.auth.error,
 })
 
 export default connect(

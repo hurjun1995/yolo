@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects'
-import { watchSignUp, watchLoginFlow, watchSocialAccountSignIn } from './authSaga'
+import { watchSignUp, watchLoginFlow } from './authSaga'
 
 export default function* rootSaga() {
-  yield all([watchSignUp(), watchLoginFlow(), watchSocialAccountSignIn()])
+  // TODO: add watchSocialAccountSignIn back in later
+  yield all([watchSignUp(), watchLoginFlow()])
 }

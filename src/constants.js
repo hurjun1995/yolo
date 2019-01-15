@@ -8,8 +8,8 @@ export const v1LocalhostBaseUrl = 'http://localhost:3000/v1'
 export const userPath = '/user'
 
 export const httpMethod = {
-    GET: "get",
-    POST: "post",
-    DELETE: 'delete',
-    UPDATE: "update"
+  GET: 'get',
+  POST: 'post',
+  DELETE: 'delete',
+  UPDATE: 'update',
 }
