@@ -1,15 +1,17 @@
 // @flow
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
+
+import MinuteSelectionBadge from '../../components/UI/MinuteSelectionBadge/MinuteSelectionBadge'
 
 type Props = {}
 type State = {
   goalName: string,
   startDate: string,
   logTime: string,
-  ReminderTime: string,
+  reminderTime: string,
 }
 class GoalDetailScreen extends React.Component<Props, State> {
   constructor(props) {
@@ -18,8 +20,10 @@ class GoalDetailScreen extends React.Component<Props, State> {
       goalName: 'sdvads',
       startDate: '2001-01-20',
       logTime: '',
-      ReminderTime: '',
+      reminderTime: '',
     }
+
+    this.onReminderTimeOptionSelected = this.onReminderTimeOptionSelected.bind(this)
   }
 
   onGoalNamePress = () => {
@@ -44,6 +48,10 @@ class GoalDetailScreen extends React.Component<Props, State> {
 
   onStartDateChange = (dateStr) => {
     this.setState({ startDate: dateStr })
+  }
+
+  onReminderTimeOptionSelected = (val) => {
+    this.setState({ reminderTime: val })
   }
 
   render() {
@@ -84,14 +92,13 @@ class GoalDetailScreen extends React.Component<Props, State> {
           />
           <ListItem
             title="Reminder"
+            subtitle="in minutes"
             rightIcon={(
-              <DatePicker
-                showIcon={false}
-                mode="time"
-                customStyles={{ dateInput: { borderWidth: 0 } }}
+              <MinuteSelectionBadge
+                onBadgePressed={this.onReminderTimeOptionSelected}
+                reminderTime={this.state.reminderTime}
               />
 )}
-            onPressRightIcon={this.onReminderTimePress}
           />
         </List>
       </View>
