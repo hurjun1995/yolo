@@ -12,6 +12,7 @@
   "flow.runOnAllFiles": true,
   // Enable/disable JavaScript validation. (For Flow)
   "javascript.validate.enable": false,
-  // Enable/disable default JavaScript formatter (For Prettier)
-  "javascript.format.enable": false
+  "[javascript]": {
+    "editor.formatOnSave": true
+  }
 }

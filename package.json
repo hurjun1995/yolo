@@ -45,14 +45,19 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "prop-types": "^15.6.2",
     "react": "@16.3.1",
     "react-native": "~0.55.2",
+    "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
     "react-native-navigation": "^2.0.2538",
+    "react-native-uuid-generator": "^4.0.1",
     "react-native-vector-icons": "@^4.2.0",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.2"
   }
 }

@@ -1,17 +1,54 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { platformSpecific } from '../../utility/util'
+import { StyleSheet } from 'react-native'
+import { getWidthAndHeight } from '../../utility/util'
 
-const { height } = Dimensions.get('window')
+const { h, w } = getWidthAndHeight()
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: platformSpecific(height * 0.15, height * 0.05),
+    marginTop: h * 0.08,
+  },
+  formContainer: {
+    height: h * 0.45,
+    width: w * 0.8,
+    alignItems: 'center',
   },
   inputContainer: {
-    width: '85%',
+    flex: 2,
+    alignSelf: 'stretch',
+  },
+  input: {
+    flex: 1,
+  },
+  // social login
+  socialLoginContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  socialLoginButton: {
+    flex: 1,
+    marginHorizontal: 3,
+    marginVertical: 0,
+  },
+  // login button
+  loginOrSubmitButtonContainer: {
+    flex: 0.7,
+    alignSelf: 'stretch',
+    marginLeft: 0,
+    marginRight: 0,
+  },
+  loginOrSubmitButton: {
+    borderRadius: 7,
+  },
+  signupSwitcher: {
+    flex: 1,
+  },
+  signUpSwitcherText: {
+    color: '#aaa',
   },
 })
 
