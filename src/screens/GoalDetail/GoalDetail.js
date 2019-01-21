@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
-import { View } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
-import DatePicker from 'react-native-datepicker'
+import { List, ListItem, Divider } from 'react-native-elements'
 
+import styles from './styles'
 import MinuteSelectionBadge from '../../components/UI/MinuteSelectionBadge/MinuteSelectionBadge'
+import MyDatePicker from '../../components/UI/MyDatePicker/MyDatePicker'
 
 type Props = {}
 type State = {
@@ -24,82 +24,55 @@ class GoalDetailScreen extends React.Component<Props, State> {
     }
   }
 
-  onGoalNamePress = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      goalName: `${prevState.goalName}a`,
-    }))
-    // TODO:
-  }
-
-  onStartDatePress = () => {
-    // TODO:
-  }
-
-  onLogTimePress = () => {
-    // TODO:
-  }
-
-  onReminderTimePress = () => {
-    // TODO:
-  }
-
-  onStartDateChange = (dateStr) => {
-    this.setState({ startDate: dateStr })
-  }
-
-  onReminderTimeOptionSelected = (val) => {
-    this.setState({ reminderTime: val })
-  }
-
   render() {
     return (
-      <View>
-        <List containerStyle={{ marginBottom: 20 }}>
-          <ListItem
-            title="Goal Name"
-            rightTitle={this.state.goalName}
-            onPressRightIcon={this.onGoalNamePress}
-          />
-          <ListItem
-            title="Start Date"
-            rightIcon={(
-              <DatePicker
-                date={this.state.startDate}
-                onDateChange={this.onStartDateChange}
-                customStyles={{ dateInput: { borderWidth: 0 } }}
-                showIcon={false}
-                cancelBtnText="Cancel"
-                confirmBtnText="Confirm"
-              />
+      <List containerStyle={styles.listContainer}>
+        <ListItem
+          hideChevron
+          title="Goal Name"
+          textInput
+          textInputMultiline
+          textInputValue={this.state.goalName}
+          textInputOnChangeText={text => this.setState({ goalName: text })}
+          textInputPlaceholder="Drink water everyday"
+          containerStyle={styles.listItem}
+        />
+        <Divider style={styles.divider} />
+        <ListItem
+          title="Start Date"
+          rightIcon={(
+            <MyDatePicker
+              date={this.state.startDate}
+              onDateChange={dateStr => this.setState({ startDate: dateStr })}
+            />
 )}
-            onPressRightIcon={this.onStartDatePress}
-          />
-          <ListItem
-            title="When to Log"
-            rightIcon={(
-              <DatePicker
-                showIcon={false}
-                mode="time"
-                customStyles={{ dateInput: { borderWidth: 0 } }}
-                cancelBtnText="Cancel"
-                confirmBtnText="Confirm"
-              />
+          containerStyle={styles.listItem}
+        />
+        <Divider style={styles.divider} />
+        <ListItem
+          title="When to Log"
+          rightIcon={(
+            <MyDatePicker
+              date={this.state.logTime}
+              mode="time"
+              onDateChange={timeStr => this.setState({ logTime: timeStr })}
+            />
 )}
-            onPressRightIcon={this.onLogTimePress}
-          />
-          <ListItem
-            title="Reminder"
-            subtitle="in minutes"
-            rightIcon={(
-              <MinuteSelectionBadge
-                onBadgePressed={this.onReminderTimeOptionSelected}
-                selectedMinute={this.state.reminderTime}
-              />
+          containerStyle={styles.listItem}
+        />
+        <Divider style={styles.divider} />
+        <ListItem
+          title="Reminder"
+          subtitle="in minutes"
+          rightIcon={(
+            <MinuteSelectionBadge
+              onBadgePressed={val => this.setState({ reminderTime: val })}
+              selectedMinute={this.state.reminderTime}
+            />
 )}
-          />
-        </List>
-      </View>
+          containerStyle={styles.listItem}
+        />
+      </List>
     )
   }
 }
