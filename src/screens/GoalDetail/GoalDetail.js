@@ -17,13 +17,11 @@ class GoalDetailScreen extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
-      goalName: 'sdvads',
-      startDate: '2001-01-20',
+      goalName: '',
+      startDate: '',
       logTime: '',
       reminderTime: '',
     }
-
-    this.onReminderTimeOptionSelected = this.onReminderTimeOptionSelected.bind(this)
   }
 
   onGoalNamePress = () => {
@@ -96,7 +94,7 @@ class GoalDetailScreen extends React.Component<Props, State> {
             rightIcon={(
               <MinuteSelectionBadge
                 onBadgePressed={this.onReminderTimeOptionSelected}
-                reminderTime={this.state.reminderTime}
+                selectedMinute={this.state.reminderTime}
               />
 )}
           />
