@@ -1,10 +1,8 @@
 /* eslint no-undef: 0, no-underscore-dangle: 0 */
-import {
-  createStore, combineReducers, compose, applyMiddleware,
-} from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { createLogger } from 'redux-logger'
-import { persistReducer , persistStore } from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './reducers'
@@ -21,15 +19,16 @@ export const configureStore = () => {
   const logger = createLogger()
   const persistConfig = {
     key: 'root',
-    storage
+    storage,
   }
 
   const persistedReducer = persistReducer(persistConfig, rootReducer)
-  const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(sagaMiddleware, logger)))
+  const store = createStore(
+    persistedReducer,
+    composeEnhancers(applyMiddleware(sagaMiddleware, logger)),
+  )
   sagaMiddleware.run(rootSaga)
   return store
 }
 
-export const configurePersistor = (store) => {
-  return persistStore(store)
-}
+export const configurePersistor = store => persistStore(store)

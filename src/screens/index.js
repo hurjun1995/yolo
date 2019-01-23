@@ -5,7 +5,7 @@ import AuthScreen from './Auth/Auth'
 import GoalListScreen from './GoalList/GoalList'
 import GoalDetailScreen from './GoalDetail/GoalDetail'
 import PersonalSettingScreen from './PersonalSetting/PersonalSetting'
-import { configureStore, configurePersistor } from '../store/configureStore'
+import { configureStore, configurePersistor } from '../store/storeConfig'
 import reduxStoreWrapper from '../store/reduxStoreWrapper'
 
 const registerScreens = () => {

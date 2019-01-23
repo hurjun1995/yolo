@@ -2,16 +2,16 @@ import { Navigation } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export const goToAuthScreen = () => Navigation.setRoot({
-    root: {
-        component: {
-            name: 'yolo.AuthScreen'
-            options: {
-                topBar: {
-                  visible: false,
-                },
-              },
-        }
-    }
+  root: {
+    component: {
+      name: 'yolo.AuthScreen',
+      options: {
+        topBar: {
+          visible: false,
+        },
+      },
+    },
+  },
 })
 
 export const startMainTabs = () => {
