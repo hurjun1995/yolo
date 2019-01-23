@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navigation } from 'react-native-navigation'
 
-import startMainTabs from './src/screens/MainTabs/startMainTabs'
+import { startMainTabs } from './src/screens/navigation'
 import AuthScreen from './src/screens/Auth/Auth'
 import registerScreens from './src/screens'
 
@@ -36,7 +36,6 @@ type States = {
 export class App extends Component<{}, States> {
   constructor(props) {
     super(props)
-    this.firebaseAuthListener = null
     this.state = {
       user: null,
     }

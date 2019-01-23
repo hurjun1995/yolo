@@ -15,13 +15,13 @@ type States = {
   token: ?string,
   error: ?Object,
 }
-export const initialState = {
+const initialState = {
   user: null,
   token: null,
   error: null,
 }
 
-export const authReducer = (state: States = initialState, action: Action) => {
+export default authReducer = (state: States = initialState, action: Action) => {
   const { type, response, error } = action
   switch (type) {
     case SIGNUP[SUCCESS]:

@@ -1,13 +1,27 @@
 import { Navigation } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const startMainTabs = () => {
+export const goToAuthScreen = () => Navigation.setRoot({
+    root: {
+        component: {
+            name: 'yolo.AuthScreen'
+            options: {
+                topBar: {
+                  visible: false,
+                },
+              },
+        }
+    }
+})
+
+export const startMainTabs = () => {
   Promise.all([
     Icon.getImageSource('ios-list-box', 30),
     Icon.getImageSource('ios-settings', 30),
   ]).then((sources) => {
     Navigation.setRoot({
       root: {
+        id: 'mainTabs',
         bottomTabs: {
           children: [
             {
@@ -52,5 +66,3 @@ const startMainTabs = () => {
     })
   })
 }
-
-export default startMainTabs

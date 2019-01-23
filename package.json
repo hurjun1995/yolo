@@ -18,9 +18,9 @@
     "flow-bin": "^0.67.1",
     "jest": "^23.5.0",
     "jest-react-native": "^18.0.0",
+    "merge": ">=1.2.1",
     "react-dom": "^16.5.2",
-    "react-test-renderer": "16.3.1",
-    "merge": ">=1.2.1"
+    "react-test-renderer": "16.3.1"
   },
   "scripts": {
     "start": "react-native start",
@@ -59,6 +59,7 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
     "redux-saga": "^0.16.2"
   }
 }
