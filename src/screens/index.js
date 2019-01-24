@@ -1,6 +1,6 @@
 import { Navigation } from 'react-native-navigation'
 
-import { App } from '../../App'
+import Initialize from './Initialize/Initialize'
 import AuthScreen from './Auth/Auth'
 import GoalListScreen from './GoalList/GoalList'
 import GoalDetailScreen from './GoalDetail/GoalDetail'
@@ -12,7 +12,7 @@ const registerScreens = () => {
   const store = configureStore()
   const persistor = configurePersistor(store)
 
-  Navigation.registerComponent('yolo.App', () => App)
+  Navigation.registerComponent('yolo.InitializeScreen', reduxStoreWrapper(Initialize, store, persistor))
   Navigation.registerComponent('yolo.AuthScreen', reduxStoreWrapper(AuthScreen, store, persistor))
   Navigation.registerComponent('yolo.GoalListScreen', () => GoalListScreen)
   Navigation.registerComponent('yolo.GoalDetailScreen', () => GoalDetailScreen)

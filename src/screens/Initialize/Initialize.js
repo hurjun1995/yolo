@@ -1,35 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
+import { goToAuthScreen, startMainTabs } from '../navigations'
 import MainText from '../../components/UI/MainText/MainText'
 
-type States = {
-  user: ?Object,
+type Props = {
+  userToken: ?string,
 }
 
-export class App extends Component<{}, States> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: null,
-    }
+class Initialize extends Component<Props, {}> {
+  componentDidMount() {
+    if (this.props.userToken == null) goToAuthScreen()
+    startMainTabs()
   }
-
-  // componentDidMount() {
-  //   this.firebaseAuthListener = firebase.auth().onAuthStateChanged((user) => {
-  //     this.setState({ user })
-  //   })
-  // }
-
-  // componentWillUnmount() {
-  //   if (this.firebaseAuthListener) {
-  //     this.firebaseAuthListener()
-  //   }
-  // }
-
-  // firebaseAuthListener: ?Function
 
   render() {
     const { user } = this.state
     return <MainText>Loading...</MainText>
   }
 }
+
+const mapStateToProps = state => ({
+  userToken: state.auth.token,
+})
+
+export default connect(mapStateToProps, null)(Initialize)
