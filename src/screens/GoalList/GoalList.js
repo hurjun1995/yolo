@@ -117,7 +117,6 @@ class GoalListScreen extends Component<Props, State> {
   }
 
   render() {
-    // const { text } = this.state
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topContainer}>

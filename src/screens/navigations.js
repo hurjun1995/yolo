@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 export const goToAuthScreen = () => Navigation.setRoot({
   root: {
+    id: 'auth',
     component: {
       name: 'yolo.AuthScreen',
       options: {

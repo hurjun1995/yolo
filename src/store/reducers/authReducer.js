@@ -2,7 +2,7 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const {
-  SIGNUP, LOGIN, FBSIGNIN, GOOGLESIGNIN, SUCCESS, FAILURE,
+  SIGNUP, LOGIN, LOGOUT, FBSIGNIN, GOOGLESIGNIN, SUCCESS, FAILURE,
 } = actionTypes
 
 type Action = {
@@ -44,6 +44,12 @@ const authReducer = (state: States = initialState, action: Action) => {
       return {
         ...state,
         error,
+      }
+    case LOGOUT:
+      return {
+        user: null,
+        token: null,
+        error: null,
       }
     default:
       return state

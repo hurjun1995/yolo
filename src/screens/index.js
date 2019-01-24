@@ -12,11 +12,17 @@ const registerScreens = () => {
   const store = configureStore()
   const persistor = configurePersistor(store)
 
-  Navigation.registerComponent('yolo.InitializeScreen', reduxStoreWrapper(Initialize, store, persistor))
+  Navigation.registerComponent(
+    'yolo.InitializeScreen',
+    reduxStoreWrapper(Initialize, store, persistor),
+  )
   Navigation.registerComponent('yolo.AuthScreen', reduxStoreWrapper(AuthScreen, store, persistor))
   Navigation.registerComponent('yolo.GoalListScreen', () => GoalListScreen)
   Navigation.registerComponent('yolo.GoalDetailScreen', () => GoalDetailScreen)
-  Navigation.registerComponent('yolo.PersonalSettingScreen', () => PersonalSettingScreen)
+  Navigation.registerComponent(
+    'yolo.PersonalSettingScreen',
+    reduxStoreWrapper(PersonalSettingScreen, store, persistor),
+  )
 }
 
 export default registerScreens

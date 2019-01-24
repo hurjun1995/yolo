@@ -10,12 +10,14 @@ type Props = {
 
 class Initialize extends Component<Props, {}> {
   componentDidMount() {
-    if (this.props.userToken == null) goToAuthScreen()
-    startMainTabs()
+    if (this.props.userToken === null) {
+      goToAuthScreen()
+    } else {
+      startMainTabs()
+    }
   }
 
   render() {
-    const { user } = this.state
     return <MainText>Loading...</MainText>
   }
 }
@@ -24,4 +26,7 @@ const mapStateToProps = state => ({
   userToken: state.auth.token,
 })
 
-export default connect(mapStateToProps, null)(Initialize)
+export default connect(
+  mapStateToProps,
+  null,
+)(Initialize)
