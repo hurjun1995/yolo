@@ -3,7 +3,7 @@ import { take, put, call } from 'redux-saga/effects'
 
 import * as actions from '../actions/actionTypes'
 import * as api from '../../api/auth'
-import startMainTabs from '../../screens/MainTabs/startMainTabs'
+import { startMainTabs } from '../../screens/navigations'
 import {
   FACEBOOK,
   GOOGLE,

@@ -17,6 +17,7 @@ export function action(type, payload = {}) {
 export const USER = createRequestTypes('USER')
 export const SIGNUP = createRequestTypes('SIGNUP')
 export const LOGIN = createRequestTypes('LOGIN')
+export const LOGOUT = 'LOGOUT'
 export const FBSIGNIN = createRequestTypes('FBSIGNIN')
 export const GOOGLESIGNIN = createRequestTypes('GOOGLESIGNIN')
 export const SOCIALSIGNIN = createRequestTypes('SOCIALSIGNIN')
