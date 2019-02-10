@@ -36,6 +36,7 @@ class GoalDetailScreen extends React.Component<Props, State> {
           textInputOnChangeText={text => this.setState({ goalName: text })}
           textInputPlaceholder="Drink water everyday"
           containerStyle={styles.listItem}
+          textInputStyle={styles.textInput}
         />
         <Divider style={styles.divider} />
         <ListItem
