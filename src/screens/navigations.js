@@ -67,3 +67,22 @@ export const startMainTabs = () => {
     })
   })
 }
+
+export const pushGoalDetailScreenOnStack = (originalComponentId) => {
+  _pushScreenOnStack(originalComponentId, 'yolo.GoalDetailScreen')
+}
+
+export const pushGoalSurveyScreenOnStack = (originalComponentId) => {
+  _pushScreenOnStack(originalComponentId, 'yolo.GoalSurveyScreen')
+}
+
+const _pushScreenOnStack = (originalComponentId, childComponentId) => {
+  Navigation.push(originalComponentId, {
+    component: {
+      name: childComponentId,
+      passProps: {
+        originalComponentId,
+      },
+    },
+  })
+}
