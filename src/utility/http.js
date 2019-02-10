@@ -1,12 +1,12 @@
 // @flow
 import axios from 'axios'
-import { v1LocalhostBaseUrl } from '../constants'
+import { v1BaseUrl } from '../config/config'
 
 function _getDefaultConfig(method, uri, body, headers) {
   const config = {
     method,
     url: uri,
-    baseURL: v1LocalhostBaseUrl,
+    baseURL: v1BaseUrl,
     headers,
     data: body,
     responseType: 'json',
