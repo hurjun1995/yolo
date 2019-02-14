@@ -22,7 +22,6 @@ class ScaleAnswer extends React.Component {
   generateScaleButtons = (numOfScale) => {
     const retArr = []
     for (let i = 1; i < numOfScale + 1; i++) {
-      console.log(i)
       retArr.push(
         <Badge
           key={i}
