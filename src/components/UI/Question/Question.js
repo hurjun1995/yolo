@@ -10,11 +10,22 @@ export const QuestionTypeEnum = {
 }
 
 const Question = (props) => {
-  const questionPlaceholder = 'Question placeholder'
+  const {
+    questionId, questionText, questionType, handleQuestionAnswered,
+  } = props
+
+  const handleAnswerClick = (answer) => {
+    handleQuestionAnswered(questionId, answer)
+  }
+
   return (
     <View>
-      <Text>{questionPlaceholder}</Text>
-      {props.questionType === QuestionTypeEnum.SCALE ? <ScaleAnswer /> : <MultipleChoiceAnswer />}
+      <Text>{questionText}</Text>
+      {questionType === QuestionTypeEnum.SCALE ? (
+        <ScaleAnswer questionId scale={props.scale} handleAnswerClick={handleAnswerClick} />
+      ) : (
+        <MultipleChoiceAnswer />
+      )}
     </View>
   )
 }

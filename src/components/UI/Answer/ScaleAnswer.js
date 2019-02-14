@@ -4,30 +4,45 @@ import { Badge } from 'react-native-elements'
 
 import styles from './styles'
 
-const selectedBadge = '1'
-
-const generateScaleButtons = (numOfScale) => {
-  const retArr = []
-  for (let i = 1; i < numOfScale; i++) {
-    console.log(i)
-    retArr.push(
-      <Badge
-        key={i}
-        value={i}
-        containerStyle={
-          selectedBadge === i.toString()
-            ? [styles.badgeBase, styles.selectedBadge]
-            : styles.badgeBase
-        }
-      />,
-    )
+class ScaleAnswer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedScale: '',
+    }
   }
-  return retArr
-}
 
-const ScaleAnswer = (props) => {
-  console.log('hi')
-  return <View style={{ flexDirection: 'row' }}>{generateScaleButtons(8)}</View>
+  handleBadgeClick = (value) => {
+    this.setState({
+      selectedScale: value,
+    })
+    this.props.handleAnswerClick(value)
+  }
+
+  generateScaleButtons = (numOfScale) => {
+    const retArr = []
+    for (let i = 1; i < numOfScale + 1; i++) {
+      console.log(i)
+      retArr.push(
+        <Badge
+          key={i}
+          value={i}
+          containerStyle={
+            this.state.selectedScale === i.toString()
+              ? [styles.badgeBase, styles.selectedBadge]
+              : styles.badgeBase
+          }
+          onPress={() => this.handleBadgeClick(i.toString())}
+        />,
+      )
+    }
+    return retArr
+  }
+
+  render() {
+    const { scale } = this.props
+    return <View style={styles.container}>{this.generateScaleButtons(scale)}</View>
+  }
 }
 
 export default ScaleAnswer
