@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import Question, { QuestionTypeEnum } from '../../components/UI/Question/Question'
 
 const mockQuestions = [
@@ -11,21 +11,41 @@ const mockQuestions = [
   },
   {
     id: 2,
-    question: 'This is question 2. How would you rate Alice Lee-Yoon?',
+    question: 'This is question 2. What is your average income?',
+    questionType: 'multiple_choice',
+    answerOptions: [
+      'ooooooooooooooooooooooooooooooooooooooooooooooooooooption1',
+      'option2',
+      'option3',
+      'ooooooooooooooooooooooooooooooooooooooooooooooooooooption4',
+      'option5',
+      'option6',
+      'option7',
+    ],
+  },
+  {
+    id: 3,
+    question: 'This is question 3. How would you rate Alice Lee-Yoon?',
     questionType: 'scale',
     scale: 10,
   },
   {
-    id: 3,
-    question: 'This is question 3. How happy are you today?',
+    id: 4,
+    question: 'This is question 4. How happy are you today?',
     questionType: 'scale',
     scale: 5,
   },
   {
-    id: 4,
-    question: 'What is your race?',
-    questionType: 'MULTIPLE_CHOICE',
-    answerOptions: ['option1', 'option2', 'option3', 'option4', 'option5'],
+    id: 5,
+    question: 'This is question 5. What is your race?',
+    questionType: 'multiple_choice',
+    answerOptions: [
+      'ooooooooooooooooooooooooooooooooooooooooooooooooooooption1',
+      'option2',
+      'option3',
+      'option4',
+      'option5',
+    ],
   },
 ]
 
@@ -45,18 +65,18 @@ class GoalSurvey extends Component {
     })
   }
 
-  generateQuestions = (questionInfoList) => {
+  generateQuestions = (questionList) => {
     const retArray = []
-    questionInfoList.forEach((element) => {
-      switch (element.questionType) {
+    questionList.forEach((q) => {
+      switch (q.questionType) {
         case 'scale':
           retArray.push(
             <Question
-              key={element.id}
-              questionId={element.id}
-              questionText={element.question}
+              key={q.id}
+              questionId={q.id}
+              questionText={q.question}
               questionType={QuestionTypeEnum.SCALE}
-              scale={element.scale}
+              scale={q.scale}
               handleQuestionAnswered={this.handleQuestionAnswered}
             />,
           )
@@ -64,11 +84,11 @@ class GoalSurvey extends Component {
         case 'multiple_choice':
           retArray.push(
             <Question
-              key={element.id}
-              questionId={element.id}
-              questionText={element.question}
+              key={q.id}
+              questionId={q.id}
+              questionText={q.question}
               questionType={QuestionTypeEnum.MULTIPLE_CHOICE}
-              answerOptions={element.answerOptions}
+              answerOptions={q.answerOptions}
               handleQuestionAnswered={this.handleQuestionAnswered}
             />,
           )
@@ -81,7 +101,7 @@ class GoalSurvey extends Component {
   }
 
   render() {
-    return <View>{this.generateQuestions(mockQuestions)}</View>
+    return <ScrollView>{this.generateQuestions(mockQuestions)}</ScrollView>
   }
 }
 

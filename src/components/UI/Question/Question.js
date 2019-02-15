@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
+import styles from './styles'
 import ScaleAnswer from '../Answer/ScaleAnswer'
 import MultipleChoiceAnswer from '../Answer/MultipleChoiceAnswer'
 
@@ -20,11 +21,15 @@ const Question = (props) => {
 
   return (
     <View>
-      <Text>{questionText}</Text>
+      <Text style={styles.questionText}>{questionText}</Text>
       {questionType === QuestionTypeEnum.SCALE ? (
         <ScaleAnswer questionId scale={props.scale} handleAnswerClick={handleAnswerClick} />
       ) : (
-        <MultipleChoiceAnswer />
+        <MultipleChoiceAnswer
+          questionId
+          answerOptions={props.answerOptions}
+          handleAnswerClick={handleAnswerClick}
+        />
       )}
     </View>
   )
