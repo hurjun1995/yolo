@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { getWidthAndHeight } from '../../../utility/util'
 
-const { w, h } = getWidthAndHeight()
+const { w } = getWidthAndHeight()
 
 const styles = StyleSheet.create({
   questionText: {

@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
 import { getWidthAndHeight } from '../../../utility/util'
 
-const { w, h } = getWidthAndHeight()
+const { h } = getWidthAndHeight()
 
 const styles = StyleSheet.create({
-  container: {
+  scaleAnswerContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
   },
   selectedBadge: {
     backgroundColor: '#f8c74d',
+  },
+  checkBoxContainer: {
+    borderWidth: 0,
+    backgroundColor: 'white',
   },
 })
 

@@ -1,6 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
+
+import styles from './styles'
 
 class MultipleChoiceAnswer extends React.Component {
   constructor(props) {
@@ -24,12 +26,12 @@ class MultipleChoiceAnswer extends React.Component {
         <CheckBox
           key={idx}
           title={option}
-          checked={option == this.state.selectedOption}
+          checked={option === this.state.selectedOption}
           onPress={() => this.handleOptionClick(option)}
           checkedIcon="dot-circle-o"
           uncheckedIcon="circle-o"
           checkedColor="#f8c74d"
-          containerStyle={{ borderWidth: 0 }}
+          containerStyle={styles.checkBoxContainer}
         />,
       )
     })
@@ -37,7 +39,8 @@ class MultipleChoiceAnswer extends React.Component {
   }
 
   render() {
-    return <View>{this.generateAnswerOptions(this.props.answerOptions)}</View>
+    const { answerOptions } = this.props
+    return <View>{this.generateAnswerOptions(answerOptions)}</View>
   }
 }
 

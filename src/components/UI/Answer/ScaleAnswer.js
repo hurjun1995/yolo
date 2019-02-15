@@ -40,7 +40,7 @@ class ScaleAnswer extends React.Component {
 
   render() {
     const { scale } = this.props
-    return <View style={styles.container}>{this.generateScaleButtons(scale)}</View>
+    return <View style={styles.scaleAnswerContainer}>{this.generateScaleButtons(scale)}</View>
   }
 }
 

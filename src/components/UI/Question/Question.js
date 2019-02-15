@@ -12,7 +12,12 @@ export const QuestionTypeEnum = {
 
 const Question = (props) => {
   const {
-    questionId, questionText, questionType, handleQuestionAnswered,
+    questionId,
+    questionText,
+    questionType,
+    handleQuestionAnswered,
+    answerOptions,
+    scale,
   } = props
 
   const handleAnswerClick = (answer) => {
@@ -23,11 +28,11 @@ const Question = (props) => {
     <View>
       <Text style={styles.questionText}>{questionText}</Text>
       {questionType === QuestionTypeEnum.SCALE ? (
-        <ScaleAnswer questionId scale={props.scale} handleAnswerClick={handleAnswerClick} />
+        <ScaleAnswer questionId={questionId} scale={scale} handleAnswerClick={handleAnswerClick} />
       ) : (
         <MultipleChoiceAnswer
-          questionId
-          answerOptions={props.answerOptions}
+          questionId={questionId}
+          answerOptions={answerOptions}
           handleAnswerClick={handleAnswerClick}
         />
       )}
