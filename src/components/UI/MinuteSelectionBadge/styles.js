@@ -7,10 +7,6 @@ const styles = StyleSheet.create({
   renderTimeOptionRowContainer: {
     flexDirection: 'row',
   },
-  badgeBase: {
-    margin: 3,
-    backgroundColor: '#344164',
-  },
   selectedBadge: {
     backgroundColor: '#f8c74d',
   },

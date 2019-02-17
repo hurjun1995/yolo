@@ -14,15 +14,17 @@ type Props = {
 
 const GoalButton = (props: Props) => {
   const { iconName, text, onClickHandler } = props
-  const content = (
-    <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <Icon name={iconName} size={Dimensions.get('window').width / 8} color="black" />
+
+  return (
+    <Touchable onPress={onClickHandler}>
+      <View style={styles.container}>
+        <View style={styles.iconContainer}>
+          <Icon name={iconName} size={Dimensions.get('window').width / 8} color="black" />
+        </View>
+        <Text>{text}</Text>
       </View>
-      <Text>{text}</Text>
-    </View>
+    </Touchable>
   )
-  return <Touchable content={content} onPress={onClickHandler} />
 }
 
 export default GoalButton

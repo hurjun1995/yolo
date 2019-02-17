@@ -1,12 +1,16 @@
 // @flow
 import React from 'react'
 import { List, ListItem, Divider } from 'react-native-elements'
+import { Navigation } from 'react-native-navigation'
 
 import styles from './styles'
 import MinuteSelectionBadge from '../../components/UI/MinuteSelectionBadge/MinuteSelectionBadge'
 import MyDatePicker from '../../components/UI/MyDatePicker/MyDatePicker'
+import { pushGoalSurveyScreenOnStack } from '../navigations'
 
-type Props = {}
+type Props = {
+  originalComponentId: string,
+}
 type State = {
   goalName: string,
   startDate: string,
@@ -14,6 +18,20 @@ type State = {
   reminderTime: string,
 }
 class GoalDetailScreen extends React.Component<Props, State> {
+  static options() {
+    return {
+      topBar: {
+        rightButtons: [
+          {
+            text: 'NEXT',
+            id: 'nextButton',
+            buttonColor: 'black',
+          },
+        ],
+      },
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -22,6 +40,14 @@ class GoalDetailScreen extends React.Component<Props, State> {
       logTime: '',
       reminderTime: '',
     }
+
+    Navigation.events().bindComponent(this)
+  }
+
+  // can pass "buttonId" as props if needed later
+  navigationButtonPressed() {
+    console.log(this.props.originalComponentId)
+    pushGoalSurveyScreenOnStack(this.props.originalComponentId)
   }
 
   render() {
@@ -36,6 +62,7 @@ class GoalDetailScreen extends React.Component<Props, State> {
           textInputOnChangeText={text => this.setState({ goalName: text })}
           textInputPlaceholder="Drink water everyday"
           containerStyle={styles.listItem}
+          textInputStyle={styles.textInput}
         />
         <Divider style={styles.divider} />
         <ListItem

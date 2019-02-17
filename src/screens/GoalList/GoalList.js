@@ -7,6 +7,7 @@ import { Navigation } from 'react-native-navigation'
 import styles from './styles'
 import GoalButton from '../../components/UI/GoalButton/GoalButton'
 import CustomGoalInput from '../../components/UI/CustomGoalInput/CustomGoalInput'
+import { pushGoalDetailScreenOnStack } from '../navigations'
 
 const goalList = [
   {
@@ -78,12 +79,7 @@ class GoalListScreen extends Component<Props, State> {
   }
 
   handleButtonClick = () => {
-    const { originComponentId } = this.props
-    Navigation.push(originComponentId, {
-      component: {
-        name: 'yolo.GoalDetailScreen',
-      },
-    })
+    pushGoalDetailScreenOnStack(this.props.originComponentId)
   }
 
   generateGoalButtonsRow = (list: Array<Object>, idx: number) => (

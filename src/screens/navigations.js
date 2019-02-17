@@ -1,6 +1,24 @@
 import { Navigation } from 'react-native-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
+/**
+ * PRIVATE METHODS
+ */
+const _pushScreenOnStack = (originalComponentId, childComponentId) => {
+  Navigation.push(originalComponentId, {
+    component: {
+      name: childComponentId,
+      passProps: {
+        originalComponentId,
+      },
+    },
+  })
+}
+
+/**
+ * PUBLIC METHODS
+ */
+
 export const goToAuthScreen = () => Navigation.setRoot({
   root: {
     id: 'auth',
@@ -66,4 +84,12 @@ export const startMainTabs = () => {
       },
     })
   })
+}
+
+export const pushGoalDetailScreenOnStack = (originalComponentId) => {
+  _pushScreenOnStack(originalComponentId, 'yolo.GoalDetailScreen')
+}
+
+export const pushGoalSurveyScreenOnStack = (originalComponentId) => {
+  _pushScreenOnStack(originalComponentId, 'yolo.GoalSurveyScreen')
 }

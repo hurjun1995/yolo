@@ -51,6 +51,7 @@
     "prop-types": "^15.6.2",
     "react": "@16.3.1",
     "react-native": "~0.55.2",
+    "react-native-config": "^0.11.7",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
     "react-native-navigation": "^2.0.2538",
@@ -58,6 +59,7 @@
     "react-native-vector-icons": "@^4.2.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-saga": "^0.16.2"

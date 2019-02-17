@@ -12,6 +12,7 @@
     "linebreak-style": 0,
     "react/destructuring-assignment": 0,
     "import/extensions": [1, "never", { "svg": "always" }],
+    "no-plusplus": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {
