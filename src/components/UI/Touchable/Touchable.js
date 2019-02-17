@@ -7,11 +7,17 @@ type Props = {
   onPress: Function,
 }
 const Touchable = (props: Props) => {
-  const { content, onPress } = props
+  const { content, onPress, children } = props
   return Platform.OS === 'ios' ? (
-    <TouchableOpacity onPress={onPress}>{content}</TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
+      {content}
+      {children}
+    </TouchableOpacity>
   ) : (
-    <TouchableNativeFeedback onPress={onPress}>{content}</TouchableNativeFeedback>
+    <TouchableNativeFeedback onPress={onPress}>
+      {content}
+      {children}
+    </TouchableNativeFeedback>
   )
 }
 export default Touchable

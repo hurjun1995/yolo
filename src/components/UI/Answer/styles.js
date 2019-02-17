@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: h * 0.05,
   },
-  badgeBase: {
-    flex: 1,
-    margin: 3,
-    backgroundColor: '#344164',
-  },
   selectedBadge: {
     backgroundColor: '#f8c74d',
   },

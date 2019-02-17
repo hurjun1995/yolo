@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Badge } from 'react-native-elements'
 
+import Badge from '../Badge/Badge'
 import styles from './styles'
 
 class ScaleAnswer extends React.Component {
@@ -22,18 +22,15 @@ class ScaleAnswer extends React.Component {
   generateScaleButtons = (numOfScale) => {
     const retArr = []
     for (let i = 1; i < numOfScale + 1; i++) {
-      retArr.push(
+      const badge = (
         <Badge
           key={i}
           value={i}
-          containerStyle={
-            this.state.selectedScale === i.toString()
-              ? [styles.badgeBase, styles.selectedBadge]
-              : styles.badgeBase
-          }
+          containerStyle={this.state.selectedScale === i.toString() && styles.selectedBadge}
           onPress={() => this.handleBadgeClick(i.toString())}
-        />,
+        />
       )
+      retArr.push(badge)
     }
     return retArr
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Badge } from 'react-native-elements'
 
+import Badge from '../Badge/Badge'
 import styles from './styles'
 
 const MinuteSelectionBadge = (props) => {
@@ -14,11 +14,7 @@ const MinuteSelectionBadge = (props) => {
         key={val}
         value={val}
         onPress={() => onBadgePressed(val.toString())}
-        containerStyle={
-          selectedMinute === val.toString()
-            ? [styles.badgeBase, styles.selectedBadge]
-            : styles.badgeBase
-        }
+        containerStyle={selectedMinute === val.toString() && styles.selectedBadge}
       />
     )
   }

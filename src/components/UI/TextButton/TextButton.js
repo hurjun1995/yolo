@@ -11,8 +11,12 @@ type Props = {
 }
 const TextButton = (props: Props) => {
   const { title, onPress, style } = props
-  const content = <Text style={style}>{title}</Text>
-  return <Touchable content={content} onPress={onPress} />
+
+  return (
+    <Touchable onPress={onPress}>
+      <Text style={style}>{title}</Text>
+    </Touchable>
+  )
 }
 
 TextButton.defaultProps = {
